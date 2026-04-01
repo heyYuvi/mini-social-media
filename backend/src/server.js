@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 import mongoDB from './config/db.js';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes.js';
-import protect from './middlewares/authMiddleware.js';
+import postRoutes from './routes/postRoutes.js';
+import commentRoutes from './routes/commentRoutes.js';
 
 dotenv.config();
 
@@ -24,6 +25,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", userRoutes);
+app.use("/api", postRoutes);
+app.use("/api", commentRoutes);
 
 //404 Handler
 app.use((req, res) => {

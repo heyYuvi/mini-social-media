@@ -1,11 +1,12 @@
-import { addPost, deletePost, getPost } from "../controllers/PostControllers.js";
+import { addPost, deletePost, getPost, toggleLike } from "../controllers/PostControllers.js";
 import express from "express";
 import protect from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 router.post("/posts", protect, addPost);
-router.get("/feed", protect, getPost);
-router.delete("/deletePost/:id", protect, deletePost);
+router.get("/posts", protect, getPost);
+router.delete("/posts/:id", protect, deletePost);
+router.put("/posts/like/:id", protect, toggleLike);
 
 export default router;
