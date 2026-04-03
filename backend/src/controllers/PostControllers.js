@@ -178,3 +178,56 @@ export const toggleLike = async (req, res) => {
         });
     }
 }
+
+// Personalized feed
+
+export const getFeed = async (req, res) =>{
+    try{
+            const page = Math.max(Number(req.query.page || 1), 1);
+    const limit = Math.min(Number(req.query.limit || 5), 10);
+    const skip = (page - 1) * limit;
+
+    const authors = [...req.user.following, req.user._id]
+
+    const posts = await Post.find({ author: { $in: authors } }).sort({ createdAt: -1}).populate("author", "name avatar").skip(skip).limit(limit).lean();
+    if(posts.length === 0){
+        return res.json({
+            success: true,
+            count: 0,
+            total: 0,
+            page,
+            limit,
+            hasMore: false,
+            data: []
+        });
+    }
+    
+    const total = await Post.countDocuments({ author: { $in: authors }});
+
+    return res.json({
+        success: true,
+        count: posts.length,
+        total: total,
+        page: page,
+        limit: limit,
+        hasMore: skip + posts.length <  total,
+        data: posts.map((post) =>({
+            id: post._id,
+            content: post.content,
+            likes: post.likes.length,
+            author: {
+                id: post.author._id,
+                name: post.author.name,
+                avatar: post.author.avatar
+            },
+            createdAt: post.createdAt
+        }))
+    });
+    }catch(error){
+        console.error("Feed error: ", error);
+        return res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+    }
+}
