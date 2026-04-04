@@ -183,7 +183,7 @@ export const toggleLike = async (req, res) => {
 
 export const getFeed = async (req, res) =>{
     try{
-            const page = Math.max(Number(req.query.page || 1), 1);
+    const page = Math.max(Number(req.query.page || 1), 1);
     const limit = Math.min(Number(req.query.limit || 5), 10);
     const skip = (page - 1) * limit;
 
