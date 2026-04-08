@@ -3,6 +3,7 @@ import './App.css'
 import Feed from './pages/Feed'
 import Layout from './layout/Layouts'
 import Login from './pages/Login'
+import Register from './pages/Register'
 
 function App() {
   
@@ -11,6 +12,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="register" element={<Register />}></Route>
     </Routes>
     </BrowserRouter>
     </>
