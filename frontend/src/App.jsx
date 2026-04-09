@@ -4,6 +4,7 @@ import Feed from './pages/Feed'
 import Layout from './layout/Layouts'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import ProtectedRoute from './components/ProtectedRoutr'
 
 function App() {
   
@@ -11,8 +12,11 @@ function App() {
     <>
     <BrowserRouter>
     <Routes>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="register" element={<Register />}></Route>
+      <Route path="/" element={<Login />}></Route>
+      <Route path="/register" element={<Register />}></Route>
+      <Route element={<Layout />}>
+      <Route path="/feed" element={<ProtectedRoute><Feed /></ProtectedRoute>}></Route>
+      </Route>
     </Routes>
     </BrowserRouter>
     </>
