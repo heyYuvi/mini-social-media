@@ -7,6 +7,7 @@ import postRoutes from './routes/postRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 
 dotenv.config();
+console.log("apikey", process.env.CLOUDINARY_API_KEY);
 
 const app = express();
 

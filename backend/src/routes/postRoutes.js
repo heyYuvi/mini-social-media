@@ -2,10 +2,11 @@ import { addPost, deletePost, getFeed, getPost, toggleLike } from "../controller
 import express from "express";
 import protect from "../middlewares/authMiddleware.js";
 import { toggleFollow } from "../controllers/UserControllers.js";
+import upload from "../middlewares/upload.js";
 
 const router = express.Router();
 
-router.post("/posts", protect, addPost);
+router.post("/posts", protect, upload.single("image"), addPost);
 router.get("/posts", protect, getPost);
 router.delete("/posts/:id", protect, deletePost);
 router.put("/posts/like/:id", protect, toggleLike);

@@ -31,6 +31,9 @@ const Feed = () =>{
                             </div>
                             <div>
                                 <p className="text-gray-500 italic mb-5">{post.content}</p>
+                                {post.image?.trim() !="" && (
+                                    <img src={post.image} alt="post not found" className="w-full rounded-md mb-3 object-cover"></img>
+                                )}
                                 <p className="font-semibold text-blue-500">💙{post.likes} Likes</p>
                             </div>
                         </div>

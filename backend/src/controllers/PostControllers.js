@@ -1,11 +1,30 @@
 import mongoose from "mongoose";
 import Post from "../models/Post.js";
 import postCheck from "../validations/PostValidation.js";
+import cloudinary from "../config/cloudinary.js";
 
 // Posting logic
 
 export const addPost = async (req, res) => {
     try {
+
+        let imageUrl = "";
+        if(req.file){
+            const result = await new Promise((resolve, reject) =>{
+                const stream = cloudinary.uploader.upload_stream(
+                    { folder: "posts"},
+                    (error, result)=>{
+                        if(error) return reject(error);
+                        resolve(result);
+                    });
+
+                    stream.end(req.file.buffer);
+            });
+
+            imageUrl = result.secure_url
+        }
+
+
         const result = postCheck.safeParse(req.body);
         if (!result.success) {
             return res.status(400).json({
@@ -18,7 +37,7 @@ export const addPost = async (req, res) => {
 
         const post = await Post.create({
             content: data.content,
-            image: data.image || "",
+            image: imageUrl,
             author: req.user._id
         });
 
@@ -214,6 +233,7 @@ export const getFeed = async (req, res) =>{
         data: posts.map((post) =>({
             id: post._id,
             content: post.content,
+            image: post.image,
             likes: post.likes.length,
             author: {
                 id: post.author._id,
