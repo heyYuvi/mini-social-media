@@ -10,7 +10,7 @@ const Navbar = () =>{
             </div>
             <div className="flex gap-3 text-gray-600">
                 <Link to="/feed" className="font-semibold hover:border-b-2 border-blue-600 hover:text-blue-600 transition">Feed</Link>
-                <p className="font-semibold hover:border-b-2 border-blue-600 hover:text-blue-600 transition">Profile</p>
+                <Link to="/post" className="font-semibold hover:border-b-2 border-blue-600 hover:text-blue-600 transition">Post</Link>
             </div>
             <div>
                 <Logout /> 

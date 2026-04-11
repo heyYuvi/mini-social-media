@@ -5,6 +5,7 @@ import Layout from './layout/Layouts'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ProtectedRoute from './components/ProtectedRoutr'
+import CreatePost from './pages/CreatePost'
 
 function App() {
   
@@ -16,6 +17,7 @@ function App() {
       <Route path="/register" element={<Register />}></Route>
       <Route element={<Layout />}>
       <Route path="/feed" element={<ProtectedRoute><Feed /></ProtectedRoute>}></Route>
+      <Route path="/post" element={<ProtectedRoute><CreatePost></CreatePost></ProtectedRoute>}></Route>
       </Route>
     </Routes>
     </BrowserRouter>
