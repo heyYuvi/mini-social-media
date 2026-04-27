@@ -23,12 +23,22 @@ const Test = () =>{
         setContent("");
         setImage(null);
         navigate("/feed");
+        fileRef.current.value = null;
+    }
+
+    const handleClick = () =>{
+        fileRef.current.click();
     }
 
     return (
         <div>
             <textarea value={content} onChange={(e) =>{setContent(e.target.value)}} placeholder="Write here whats on yourt mind"></textarea>
-            <input type="file" ref={fileRef} onChange={(e) =>{setImage(e.target.files[0])}}></input>
+            <input type="file" ref={fileRef} onChange={(e) =>{setImage(e.target.files[0])}} className="hidden"></input>
+            <div onClick={handleClick} className="bg-blue-500 w-96 h-96">
+                {image && (
+                    <img src={URL.createObjectURL(image)} alt="preview" className="object-cover w-full h-full"/>
+                )}
+            </div>
             <button onClick={handlePost}>Post</button>
         </div>
     )
