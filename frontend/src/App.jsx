@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import ProtectedRoute from './components/ProtectedRoutr'
 import CreatePost from './pages/CreatePost'
+import Test from './pages/Test'
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
       <Route element={<Layout />}>
       <Route path="/feed" element={<ProtectedRoute><Feed /></ProtectedRoute>}></Route>
       <Route path="/post" element={<ProtectedRoute><CreatePost></CreatePost></ProtectedRoute>}></Route>
+      <Route path="/test" element={<ProtectedRoute><Test /></ProtectedRoute>}></Route>
       </Route>
     </Routes>
     </BrowserRouter>
