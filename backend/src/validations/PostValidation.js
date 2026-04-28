@@ -5,7 +5,8 @@ const postCheck = z.object({
     .string()
     .trim()
     .min(3, "Content must be at least 3 characters")
-    .max(3000, "Content should not exceed 3000 characters"),
+    .max(3000, "Content should not exceed 3000 characters")
+    .optional(),
 
     image: z
     .string()
