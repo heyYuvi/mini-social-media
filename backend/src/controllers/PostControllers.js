@@ -187,7 +187,7 @@ export const toggleLike = async (req, res) => {
         return res.json({
             success: true,
             likes: post.likes.length,
-            isLiked: !isLiked
+            isLiked: post.likes.some((userId) => userId.toString() === req.user._id.toString())
         });
     } catch (error) {
         console.error("Toggle like error: ", error);
