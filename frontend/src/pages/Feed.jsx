@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
+import LikeButton from "../components/LikeButton";
 
 const Feed = () =>{
     const [feed, setFeed] = useState([]);
@@ -34,7 +35,7 @@ const Feed = () =>{
                                 {post.image?.trim() !="" && (
                                     <img src={post.image} alt="post not found" className="w-full rounded-md mb-3 object-cover"></img>
                                 )}
-                                <p className="font-semibold text-blue-500">💙{post.likes} Likes</p>
+                                <LikeButton postId={post.id} likes={post.likes} isLiked={post.isLiked}/>
                             </div>
                         </div>
                     ))}
