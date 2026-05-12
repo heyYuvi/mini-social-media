@@ -22,7 +22,7 @@ const Feed = () =>{
 
     return (
         <div className="flex justify-center bg-gray-100 h-screen pt-10">
-            { loading? (<div>...loading</div>) : (
+            { loading? (<div className="animate-spin border-2 border-t-transparent border-blue-500 w-5 h-5 rounded-full"></div>) : (
                 <div>
                     {feed.map((post) => (
                         <div key={post.id} className="rounded-md  bg-white mb-20 w-96 p-6">
