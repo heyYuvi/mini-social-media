@@ -5,8 +5,13 @@ const Logout = () =>{
     const navigate = useNavigate();
 
     const handleLogout = () =>{
-        localStorage.removeItem("token");
-        navigate("/");
+
+        const confirmLogout = window.confirm("Logout?");
+
+        if(confirmLogout){
+            localStorage.removeItem("token");
+            navigate("/", {replace: true});
+        }
     }
 
      return (
